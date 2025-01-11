@@ -1,33 +1,60 @@
 @extends('master.app')
 @section('content')
-<h1>selamat datang {{ 'data' }}</h1>
-@php
+<div class="p-16">
 
-    $test = "ini isi variable";
+    <div class="w-full">
+            <a href="{{route('product.add')}}" class="btn btn-accent">Add</a>
+    </div>
+    <div class="overflow-x-auto">
+        <table class="table">
+            <!-- head -->
+            <thead>
+            <tr>
+                <th></th>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Stock</th>
+                <th>Tumbnail</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <!-- row 1 -->
+            @forelse ($products as $product)
+            <tr>
+                <td>{{$loop->index+1}}</td>
+                <td>{{$product->name}}</td>
+                <td>{{$product->price}}</td>
+                <td>{{$product->stock}}</td>
+                <td>{{$product->tumbnail}}</td>
+                <td>
+                    <a href="{{route('product.detail',['id'=>$product->id])}}" class="btn btn-primary">Detail</a>
+                    <a href="{{route('product.edit',['id'=>$product->id])}}" class="btn btn-secondary">Edit</a>
+                    <form action="{{route('product.delete',['id'=>$product->id])}}" method="post">
+                        {{ csrf_field() }}
+                        <input type="hidden" name="_method" value="delete">
+                        <input type="submit" value="Delete" class="btn btn-accent">
+                    </form>
+                </td>
+            </tr>
+            @empty
+                <tr>
+                    <td colspan="6">Kosong</td>
+                </tr>
+            @endforelse
+             {{-- @foreach ($products as $product)
+                <tr>
+                    <td>{{$loop->index}}</td>
+                    <td>{{$product->name}}</td>
+                    <td>{{$product->price}}</td>
+                    <td>{{$product->stock}}</td>
+                    <td>{{$product->tumbnail}}</td>
+                    <td></td>
+                </tr>
+             @endforeach --}}
 
-@endphp
-
-{{ $test }}
-
-@for ($i=0;$i<10;$i++)
-    {{ $i }}
-@endfor
-
-@php
-    $array = ['satu','dua','tiga'];
-    $rank = 10;
-@endphp
-
-@foreach ( $array as $number )
-    {{ $number }}
-@endforeach
-
-@if ($rank = 10)
-    {{ 'benar' }}
-
-    <a href="#" >link</a>
-@else
-    {{ 'salah' }}
-@endif
-
+            </tbody>
+        </table>
+    </div>
+</div>
 @endsection

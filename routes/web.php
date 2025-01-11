@@ -1,7 +1,5 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,9 +15,14 @@ Route::get('/', function () {
     return 'oke';
 });
 
-Route::get('/product/{id}', function ($id) {
-    return view('index',['data'=>$id]);
-});
+Route::get('/product','ProductController@index')->name('product.index');
+Route::get('/product/detail/{id}','ProductController@detail')->name('product.detail');
 
-Route::get('/product/edit/{id}',[\App\Http\Controllers\ProductController::class,'index']);
-Route::post('/product/store',[\App\Http\Controllers\ProductController::class,'store']);
+Route::get('/product/add','ProductController@add')->name('product.add');
+Route::post('/product','ProductController@store')->name('product.store');
+
+Route::get('/product/edit/{id}','ProductController@edit')->name('product.edit');
+Route::put('/product/edit/{id}','ProductController@update')->name('product.update');
+
+Route::delete('/product/{id}','ProductController@delete')->name('product.delete');
+
