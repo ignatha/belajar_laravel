@@ -15,6 +15,9 @@ Route::get('/', function () {
     return 'oke';
 });
 
+Route::get('/user','UserController@index');
+Route::get('/db','UserController@db');
+
 Route::get('/product','ProductController@index')->name('product.index');
 Route::get('/product/detail/{id}','ProductController@detail')->name('product.detail');
 
