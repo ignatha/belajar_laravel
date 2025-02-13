@@ -20,15 +20,14 @@ Route::get('/db','UserController@db');
 
 Route::get('/product','ProductController@index')->name('product.index');
 Route::get('/product/detail/{id}','ProductController@detail')->name('product.detail');
-
 Route::get('/product/add','ProductController@add')->name('product.add');
 Route::post('/product','ProductController@store')->name('product.store');
-
 Route::get('/product/edit/{id}','ProductController@edit')->name('product.edit');
 Route::put('/product/edit/{id}','ProductController@update')->name('product.update');
-
 Route::delete('/product/{id}','ProductController@delete')->name('product.delete');
 
+// use \App\Http\Controllers\UserController;
+Route::get('/test-user','Frontend\CategoryController@index')->name('category');
 
 Auth::routes();
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
