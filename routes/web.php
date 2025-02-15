@@ -26,8 +26,13 @@ Route::get('/product/edit/{id}','ProductController@edit')->name('product.edit');
 Route::put('/product/edit/{id}','ProductController@update')->name('product.update');
 Route::delete('/product/{id}','ProductController@delete')->name('product.delete');
 
-// use \App\Http\Controllers\UserController;
-Route::get('/test-user','Frontend\CategoryController@index')->name('category');
+Route::get('/category','Frontend\CategoryController@index')->name('category.index');
+Route::get('/category/add','Frontend\CategoryController@add')->name('category.add');
+Route::post('/category','Frontend\CategoryController@store')->name('category.store');
+Route::get('/category/edit/{id}','Frontend\CategoryController@edit')->name('category.edit');
+Route::put('/category/update','Frontend\CategoryController@update')->name('category.update');
+Route::delete('/category/{id}','Frontend\CategoryController@delete')->name('category.delete');
+
 
 Auth::routes();
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
