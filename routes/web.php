@@ -29,3 +29,11 @@ Route::put('/product/edit/{id}','ProductController@update')->name('product.updat
 
 Route::delete('/product/{id}','ProductController@delete')->name('product.delete');
 
+
+Auth::routes(['verify' => true]);
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::get('/profile', function(){
+    return 'Ini halaman Profile';
+})->middleware('verified')->name('profile');
