@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Collection;
 
-use App\Models\{User, Product};
+use App\Models\{User, Product, Admin};
 
 class UserController extends Controller
 {
@@ -90,11 +90,9 @@ class UserController extends Controller
     public function db()
     {
 
-        $users = User::with('product')->where('id',1)->first(); // langsung objek bukan array
+        $users = Admin::all(); // langsung objek bukan array
 
-        $users->product()->update([
-            'name' => 'bebek'
-        ]);
+        dd($users);
 
         return view('user.index',compact('users'));
 
