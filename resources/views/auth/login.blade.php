@@ -29,5 +29,6 @@
             <input type="submit" value="Login" class="btn btn-accent">
         </div>
     </form>
+
 </div>
 @endsection

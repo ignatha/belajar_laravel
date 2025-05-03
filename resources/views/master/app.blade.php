@@ -12,6 +12,11 @@
 </head>
 <body>
     @include('master.navbar')
+    @if (session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endif
     <div id="test" class="w-full">
         @yield('content')
     </div>

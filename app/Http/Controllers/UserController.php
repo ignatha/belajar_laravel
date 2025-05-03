@@ -9,8 +9,19 @@ use Illuminate\Support\Collection;
 
 use App\Models\{User, Product, Admin};
 
+
 class UserController extends Controller
 {
+
+    // public function __construct() {
+    //     $this->middleware(['auth']);
+    // }
+
+    public function test()
+    {
+        return "Ini dicetak dari controller user Test";
+    }
+
     public function index()
     {
 
