@@ -9,7 +9,7 @@ use App\Models\User;
 
 class Product extends Model
 {
-    protected $fillable = ['name','price','stock','tumbnail'];
+    protected $fillable = ['name','price','stock','tumbnail','user_id'];
 
     public $timestamps = false;
 

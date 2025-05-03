@@ -1,4 +1,7 @@
 @extends('master.app')
+@section('head')
+<link rel="stylesheet" href="//cdn.datatables.net/2.3.0/css/dataTables.dataTables.min.css">
+@endsection
 @section('content')
 <div class="p-16">
 
@@ -6,11 +9,11 @@
             <a href="{{route('product.add')}}" class="btn btn-accent">Add</a>
     </div>
     <div class="overflow-x-auto">
-        <table class="table">
+        <table class="table" id="tableProduct">
             <!-- head -->
             <thead>
             <tr>
-                <th></th>
+                <th>No</th>
                 <th>Name</th>
                 <th>Price</th>
                 <th>Stock</th>
@@ -19,42 +22,28 @@
             </tr>
             </thead>
             <tbody>
-            <!-- row 1 -->
-            @forelse ($products as $product)
-            <tr>
-                <td>{{$loop->index+1}}</td>
-                <td>{{$product->name}}</td>
-                <td>{{$product->price}}</td>
-                <td>{{$product->stock}}</td>
-                <td>{{$product->tumbnail}}</td>
-                <td>
-                    <a href="{{route('product.detail',['id'=>$product->id])}}" class="btn btn-primary">Detail</a>
-                    <a href="{{route('product.edit',['id'=>$product->id])}}" class="btn btn-secondary">Edit</a>
-                    <form action="{{route('product.delete',['id'=>$product->id])}}" method="post">
-                        {{ csrf_field() }}
-                        <input type="hidden" name="_method" value="delete">
-                        <input type="submit" value="Delete" class="btn btn-accent">
-                    </form>
-                </td>
-            </tr>
-            @empty
-                <tr>
-                    <td colspan="6">Kosong</td>
-                </tr>
-            @endforelse
-             {{-- @foreach ($products as $product)
-                <tr>
-                    <td>{{$loop->index}}</td>
-                    <td>{{$product->name}}</td>
-                    <td>{{$product->price}}</td>
-                    <td>{{$product->stock}}</td>
-                    <td>{{$product->tumbnail}}</td>
-                    <td></td>
-                </tr>
-             @endforeach --}}
-
             </tbody>
         </table>
     </div>
 </div>
+@endsection
+
+@section('js')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js "></script>
+<script src="//cdn.datatables.net/2.3.0/js/dataTables.min.js"></script>
+<script>
+    var oTable = $('#tableProduct').dataTable( {
+        processing: true,
+        serverSide: true,
+        ajax: '{{ route('product.fetch') }}',
+        columns: [
+                { data: 'DT_RowIndex', name: 'DT_RowIndex',  'orderable': false, 'searchable': false },
+                { data: 'name', name: 'name' },
+                { data: 'price', name: 'price', 'searchable': false },
+                { data: 'stock', name: 'stock', 'searchable': false },
+                { data: 'tumbnail', name: 'tumbnail', 'searchable': false },
+                { data: 'action', name: 'action',  'orderable': false, 'searchable': false },
+        ]
+    } );
+</script>
 @endsection

@@ -1,8 +1,8 @@
 @extends('master.app')
 @section('content')
 <div class="p-16">
-    <h1>Login User</h1>
-<form action="{{route('login.store')}}" method="POST" class="w-full gap-4 flex flex-col" >
+    <h1>Login Admin</h1>
+<form action="{{route('admin.login.store')}}" method="POST" class="w-full gap-4 flex flex-col" >
     {{ csrf_field() }}
         <div class="w-full">
             <label class="input input-bordered flex items-center gap-2">
@@ -23,12 +23,9 @@
         @error('login')
                 <span class="text-red-300">{{$message}}</span>
         @enderror
-
-        <a href="{{route('register')}}">Register Here!</a>
         <div class="w-full">
             <input type="submit" value="Login" class="btn btn-accent">
         </div>
     </form>
-
 </div>
 @endsection

@@ -43,9 +43,12 @@
               d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
           </svg>
         </button>
-        <a href="/logout" class="btn btn-ghost btn-circle">
-          Logout
-        </a>
+        @auth
+            <form action="{{route('logout')}}" method="post">
+                {{ csrf_field() }}
+                <input type="submit" value="Logout">
+            </form>
+        @endauth
       </div>
     </div>
     </nav>
