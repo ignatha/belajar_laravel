@@ -19,13 +19,10 @@ Route::get('/db','UserController@db');
 Route::get('/product','ProductController@index')->name('product.index');
 Route::get('/product/fetch','ProductController@fetch')->name('product.fetch');
 Route::get('/product/detail/{id}','ProductController@detail')->name('product.detail');
-
 Route::get('/product/add','ProductController@add')->name('product.add');
 Route::post('/product','ProductController@store')->name('product.store');
-
 Route::get('/product/edit/{id}','ProductController@edit')->name('product.edit');
 Route::put('/product/edit/{id}','ProductController@update')->name('product.update');
-
 Route::delete('/product/{id}','ProductController@delete')->name('product.delete');
 
 Route::get('/product/session','ProductController@session')->name('product.session');
@@ -40,5 +37,4 @@ Route::post('/register','AuthController@register_store')->middleware(['guest'])-
 Route::post('/logout','AuthController@logout')->name('logout');
 
 Route::get('/verif_email/{token}','AuthController@verif_email')->name('verif.email');
-
 
