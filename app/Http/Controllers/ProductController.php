@@ -33,8 +33,8 @@ class ProductController extends Controller
             return "<img src='{$url}' ></img>";
         })
         ->addColumn('action', function ($product) {
-            $detail = "<a href=".route('product.detail',['id'=>$product->id])."' class='btn btn-primary'>Detail</a>";
-            $edit = "<a href=".route('product.edit',['id'=>$product->id])."' class='btn btn-secondary'>Edit</a>";
+            $detail = "<a href='javascript:void(0)' onclick='getDetail(".$product->id.")' class='btn btn-primary'>Detail</a>";
+            $edit = "<a href='javascript:void(0)' onclick='showModalEdit(".$product->id.")' class='btn btn-secondary'>Edit</a>";
 
             $delete = "<form action=".route('product.delete',['id'=>$product->id])." method='post'>
                         ".csrf_field()."
@@ -85,6 +85,7 @@ class ProductController extends Controller
 
     public function update(Request $request,$id)
     {
+
         $validated = $request->validate([
             'name' => 'required',
             'price' => 'required',
@@ -99,32 +100,21 @@ class ProductController extends Controller
             $product->price = $request->price;
             $product->stock = $request->stock;
 
-            if ($request->tumbnail) {
-
-                if ($product->tumbnail != null) {
-                    // hapus gambar yang sebelumnya
-                    Storage::disk('r2')->delete($product->tumbnail);
-                }
-
-                $name = $this->getName($request->file('tumbnail'));
-
-                $path = $request->file('tumbnail')->storeAs('tumbnail',$name,'r2');
-
-                $product->tumbnail = $path;
-            }
-
 
             $product->save();
 
-            return redirect(route('product.index'));
+            return response()->json([
+                'success' => "Success"
+            ]);
         }
     }
 
     public function detail($id)
     {
-        $product = Product::find($id);
+        $product = Product::where('id',$id)->first();
 
-        return view('product.detail',compact('product'));
+        return response()->json($product);
+        // return view('product.detail',compact('product'));
     }
 
     public function edit($id)
